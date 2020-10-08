@@ -1,0 +1,20 @@
+{
+  "name": "cafe-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "env-cmd -f .env node index.js --unhandled-rejections=strict"
+  },
+  "author": "youssef siam",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
+    "mysql": "github:mysqljs/mysql",
+    "mysql2": "^2.2.5"
+  }
+}
