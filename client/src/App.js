@@ -18,18 +18,20 @@ const client = new ApolloClient({
 function App() {
   return (
       <ApolloProvider client={client}>
-        <Header/>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Home}/>
+        <div className="bg-gray-300">
+          <Header/>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Home}/>
 
-            {/* <Route exact path="/signin" component={SignIn}></Route>
+              {/* <Route exact path="/signin" component={SignIn}></Route>
 
-            <Route exact path="/spell" component={Spell}></Route>
+              <Route exact path="/spell" component={Spell}></Route>
 
-            <Route path="/" component={Spells}></Route> */}
-          </Switch>
-        </Router>
+              <Route path="/" component={Spells}></Route> */}
+            </Switch>
+          </Router>
+        </div>
       </ApolloProvider>
   );
 }

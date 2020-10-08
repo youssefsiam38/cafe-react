@@ -1,12 +1,13 @@
 import React from 'react';
-
+import Title from './Title.js';
 import DisplayMenu from './DisplayMenu.js'
 
 
 const Home = (props) => {
     return (
-        <div className=" bg-gray-300" >
-            <DisplayMenu/>
+        <div className=" container mx-auto" >
+            <Title/>
+            <DisplayMenu />
         </div>
     )
 };
