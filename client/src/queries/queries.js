@@ -15,7 +15,7 @@ const getMenuItemsQuery = gql`
 // query for getting ONE book
 const getMenuItemQuery = gql`
     query($id: ID){
-        book(id: $id){
+        menuItem(id: $id){
             id
             name
             type
@@ -29,7 +29,7 @@ const getMenuItemQuery = gql`
 // mutation($variable) << allows variables to be passed to the mutation
 const addMenuItemMutation = gql`
   mutation($name: String!, $type: String!, $price: String!, $description: String!) {
-    addBook(name: $name, type: $type, price: $price, description: $description){
+    addMenuItem(name: $name, type: $type, price: $price, description: $description){
       name
       id
     }

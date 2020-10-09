@@ -56,10 +56,6 @@ const RootQuery = new GraphQLObjectType({
       type: MenuItemType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args){
-        console.log(args.id)
-        // MenuItem.findByID(args.id).then((d) => {
-        //     console.log(d)
-        // });
         return MenuItem.findByID(args.id);
       }
     },
