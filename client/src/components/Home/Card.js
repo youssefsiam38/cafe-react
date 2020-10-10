@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
+import { graphql, compose } from "react-apollo";
+import {deleteMenuItemMutation} from '../../queries/queries.js'
 
 const Card = (props) => {
     const history = useHistory()
@@ -10,11 +12,22 @@ const Card = (props) => {
         if (e.stopPropagation) e.stopPropagation();
         history.push(`/edit/${props.id}`);
     }
-    const gotoDelete = (e) => {
+    const deleteHandler = (e) => {
         if (!e) e = window.event;
         e.cancelBubble = true;
         if (e.stopPropagation) e.stopPropagation();
-        history.push(`/delete/${props.id}`);
+        props.deleteMenuItemMutation({
+            variables: {
+              id: props.id
+        } }).then((res) => {
+            // renrender the DisplayMenu component after deletion
+            props.reRender(res.data.deleteMenuItem.id);
+        }).catch((e) => {
+            alert('somthing went wrong with deletion')
+        })
+
+        // props.reRender();
+
     }
     const gotoMenuItem = () => {
         history.push(`/${props.id}`);
@@ -29,11 +42,13 @@ const Card = (props) => {
                 <div className="font-bold text-2xl mb-2 inline-block cursor-text" style={{color: '#43425D'}}>{props.name}</div>
                 <div className="grid grid-cols-2 place-items-stretch gap-6" >
                     <button className="bg-green-400 hover:bg-green-600 rounded-md text-white h-8" onClick={gotoEdit}>Edit</button>
-                    <button className="bg-red-600 hover:bg-red-700 rounded-md text-white h-8" onClick={gotoDelete} >Delete</button>
+                    <button className="bg-red-600 hover:bg-red-700 rounded-md text-white h-8" onClick={deleteHandler} >Delete</button>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Card
+export default compose(
+    graphql(deleteMenuItemMutation, {name: "deleteMenuItemMutation"})
+  )(Card);

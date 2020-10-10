@@ -1,6 +1,6 @@
 import React from 'react';
-import { graphql } from "react-apollo";
-import {getMenuItemQuery} from '../../queries/queries.js'
+import { graphql, compose } from "react-apollo";
+import {getMenuItemQuery, deleteMenuItemMutation} from '../../queries/queries.js'
 import Loading from '../Loading.js';
 import { useHistory } from 'react-router-dom'
 
@@ -20,11 +20,20 @@ const MenuItem = (props) => {
         if (e.stopPropagation) e.stopPropagation();
         history.push(`/edit/${menuItem.id}`);
     }
-    const gotoDelete = (e) => {
+    const deleteHandler = (e) => {
         if (!e) e = window.event;
         e.cancelBubble = true;
         if (e.stopPropagation) e.stopPropagation();
-        history.push(`/delete/${menuItem.id}`);
+        props.deleteMenuItemMutation({
+            variables: {
+              id: menuItem.id
+        } }).then((res) => {
+            // redirect to the main menu
+            // window.location.href = `/`;
+            history.push('/?deleted=true');
+        }).catch((e) => {
+            alert('somthing went wrong with deletion')
+        })
     }
     return (
         <div className="p-24 grid grid-cols-1 md:grid-cols-2">
@@ -42,7 +51,7 @@ const MenuItem = (props) => {
                 </div>
                 <div className="grid grid-cols-2 place-items-stretch gap-6" >
                     <button className="bg-green-400 hover:bg-green-600 rounded-md text-white h-8" onClick={gotoEdit}>Edit</button>
-                    <button className="bg-red-600 hover:bg-red-700 rounded-md text-white h-8" onClick={gotoDelete} >Delete</button>
+                    <button className="bg-red-600 hover:bg-red-700 rounded-md text-white h-8" onClick={deleteHandler} >Delete</button>
                 </div>
             </div>
             </div>
@@ -50,13 +59,17 @@ const MenuItem = (props) => {
     )
 }
 
-export default graphql(getMenuItemQuery,  {
-    options: (props) => {
-    const MI_ID = props.match.params.id
-    return {
-        variables: {
-            id: MI_ID
+export default compose(
+    graphql(getMenuItemQuery,  {
+        options: (props) => {
+        const MI_ID = props.match.params.id
+        return {
+            variables: {
+                id: MI_ID
+            }
         }
-    }
-}
-  })(MenuItem);
+    }}),
+    graphql(deleteMenuItemMutation,  {
+        name: 'deleteMenuItemMutation'
+    })
+)(MenuItem)

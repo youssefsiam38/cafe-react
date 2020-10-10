@@ -34,21 +34,6 @@ const MenuItemType = new GraphQLObjectType({
   })
 });
 
-// 2. Define relationships between types.
-// This is done by adding an authorId property to books,
-// then adding an author property under fields() in BookType above.
-// The author property uses a resolve function that passes in the
-// parent array (books in this case) and the value of authorId,
-// and then searches for the corresponding data in the authors array.
-
-// To build a reciprocal relationship, a books property is added to Authortype.
-// The books type is a GraphQLList since one author can have many books.
-// The resolve function takes in the array books as the parent argument,
-// and returns the books list with the authorId property 
-// that matches the parent.id
-
-// 3. Describing a way a user can initially get into the graph
-// to grab data with root queries
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -62,36 +47,62 @@ const RootQuery = new GraphQLObjectType({
     menuItems: {
       type: new GraphQLList(MenuItemType),
       resolve(parent, args){ // not using any arguments in this case...
-        // return books;
-        // uising .find() with an empty object returns all data
+        // return menuItems;
+        // uising .findAll() returns all data
         return MenuItem.findAll();
       }
     }
   }
 });
 
-// 4. Defining a way to manipulate data
+
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     addMenuItem: {
-      type: MenuItemType, // AuthorType because we're trying to add an author
+      type: MenuItemType, 
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         type:  { type: new GraphQLNonNull(GraphQLString) },
         price:  { type: new GraphQLNonNull(GraphQLString) },
         description:  { type: new GraphQLNonNull(GraphQLString) },
         photoURL:  { type: new GraphQLNonNull(GraphQLString) }
-        // we're not adding an id because MongoDB automatically
-        // indexes data as it's entered into the database
       },
       resolve(parent, args) {
-        // this Author is coming from the mongodb model
         let mi = new MenuItem(args.name, args.type, args.price, args.description, args.photoURL);
-        // must return if we want to see data after
-        // we make mutation query in a graphql GUI.
-        // also, .save() is from mongoose
+
         return mi.save();
+      }
+    },
+    editMenuItem: {
+      type: MenuItemType, 
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        type:  { type: new GraphQLNonNull(GraphQLString) },
+        price:  { type: new GraphQLNonNull(GraphQLString) },
+        description:  { type: new GraphQLNonNull(GraphQLString) },
+        photoURL:  { type: new GraphQLNonNull(GraphQLString) }
+      },
+      async resolve(parent, args) {
+        const mi = await MenuItem.delete(args.id);
+
+        console.log(mi);
+
+        return mi;
+      }
+    },
+    deleteMenuItem: {
+      type: MenuItemType, 
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) }  
+      },
+      async resolve(parent, args) {
+        const mi = await MenuItem.delete(args.id);
+
+        console.log(mi);
+
+        return mi;
       }
     }
   }

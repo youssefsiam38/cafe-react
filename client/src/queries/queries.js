@@ -35,5 +35,24 @@ const addMenuItemMutation = gql`
     }
   }
 `
+const editMenuItemMutation = gql`
+  mutation($id: ID!, $name: String!, $type: String!, $price: String!, $description: String!) {
+    editMenuItem(id: $id, name: $name, type: $type, price: $price, description: $description){
+      id
+      name
+      type
+      price
+      description
+      photoURL
+    }
+  }
+`
+const deleteMenuItemMutation = gql`
+  mutation($id: ID!) {
+    deleteMenuItem(id: $id){
+      id
+    }
+  }
+`
 
-export { getMenuItemsQuery, getMenuItemQuery, addMenuItemMutation };
+export { getMenuItemsQuery, getMenuItemQuery, addMenuItemMutation, deleteMenuItemMutation };
