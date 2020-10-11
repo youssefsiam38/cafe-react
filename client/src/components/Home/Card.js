@@ -20,21 +20,19 @@ const Card = (props) => {
             variables: {
               id: props.id
         } }).then((res) => {
-            // renrender the DisplayMenu component after deletion
+            // rerender the DisplayMenu component after deletion
             props.reRender(res.data.deleteMenuItem.id);
         }).catch((e) => {
             alert('somthing went wrong with deletion')
         })
-
-        // props.reRender();
 
     }
     const gotoMenuItem = () => {
         history.push(`/${props.id}`);
     }
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white hover:bg-gray-200 cursor-pointer" onClick={gotoMenuItem}>
-            <img className="w-full h-64" src={props.photoURL} alt="Sunset in the mountains"/>
+        <div className="rounded overflow-hidden shadow-lg bg-white hover:bg-gray-200 cursor-pointer" style={{minWidth: '70%'}} onClick={gotoMenuItem}>
+            <img className="w-full h-64" src={props.photoURL} alt={props.name}/>
             <div className="px-6 py-4" style={{color: "#888A94"}} >
                 <p className="text-gray-700 text-base inline-block cursor-text" style={{color: "#888A94"}} >{props.type.toUpperCase()}</p>
                 <br/>

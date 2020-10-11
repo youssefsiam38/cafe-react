@@ -4,11 +4,12 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import ApolloClient from "apollo-boost";
+import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from "react-apollo";
 import keys from './keys.js'
 import Home from './components/Home/Home.js'
 import Header from './components/Header/Header.js'
+import Footer from './components/Footer/Footer.js'
 import MenuItem from './components/MenuItem/MenuItem.js'
 import Edit from './components/Edit/Edit.js'
 import Add from './components/Add/Add.js'
@@ -32,10 +33,8 @@ function App() {
               <Route exact path="/:id" component={MenuItem}></Route>
               <Route exact path="/edit/:id" component={() => <Edit />}></Route>
 
-              {/*<Route exact path="/spell" component={Spell}></Route>
-
-              <Route path="/" component={Spells}></Route> */}
             </Switch>
+          <Footer/>
           </Router>
         </div>
       </ApolloProvider>

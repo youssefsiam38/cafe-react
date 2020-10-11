@@ -3,7 +3,7 @@ import Title from './Title.js';
 import DisplayMenu from './DisplayMenu.js'
 
 
-const Home = (props) => {
+const Home = () => {
     return (
         <div className=" container mx-auto" >
             <Title/>

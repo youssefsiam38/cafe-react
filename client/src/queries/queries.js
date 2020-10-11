@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost"; // to make GraphQL queries
+const { gql } = require('apollo-boost'); // to make GraphQL queries
 
 const getMenuItemsQuery = gql`
     query {
@@ -12,7 +12,7 @@ const getMenuItemsQuery = gql`
     }
 `
 
-// query for getting ONE book
+// query for getting one menu item
 const getMenuItemQuery = gql`
     query($id: ID){
         menuItem(id: $id){
@@ -26,7 +26,6 @@ const getMenuItemQuery = gql`
     }
 `
 
-// mutation($variable) << allows variables to be passed to the mutation
 const addMenuItemMutation = gql`
   mutation($name: String!, $type: String!, $price: String!, $description: String!, $photoURL: String!) {
     addMenuItem(name: $name, type: $type, price: $price, description: $description, photoURL: $photoURL){

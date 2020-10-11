@@ -42,10 +42,6 @@ app.post('/image', upload.single('image'), async (req, res) => {
 
 })
 
-app.get('/', (req, res) => {
-  res.render('index.html');
-})
-
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}...`);
 });

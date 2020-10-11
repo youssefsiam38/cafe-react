@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { addMenuItemMutation} from '../../queries/queries.js'
 import { useHistory } from 'react-router-dom'
 import {IMAGE_UPLOAD_ROUTE} from '../../keys.js'
@@ -12,16 +12,11 @@ const Add = (props) => {
 
     const [state, setState] = useState({
         name: '',
-        type: '',
+        type: 'Main Course',
         price: '',
         description: '',
         photoURL: ''
     })
-
-
-    const borderRed = () => {
-        return " border border-red-500 "
-    }
 
     const uploadPhoto = (itemID) => {
         const inputFile = document.getElementById('form-photo');
@@ -85,6 +80,7 @@ const Add = (props) => {
                         style={{borderColor: '#AFB1BC'}}
                         value={state.name}
                         required
+                        data-testid="form-name"
                         onChange={(e) => {
                             setState({...state, name: e.target.value})
                         }} />
@@ -97,6 +93,7 @@ const Add = (props) => {
                         type="number"
                         value={state.price}
                         required
+                        data-testid="form-price"
                         onChange={(e) => {
                             setState({...state, price: e.target.value})
                         }} />
@@ -108,6 +105,7 @@ const Add = (props) => {
                         style={{borderColor: '#AFB1BC'}}
                         value={state.description}
                         required
+                        data-testid="form-desc"
                         onChange={(e) => {
                             setState({...state, description: e.target.value})
                         }} />
@@ -116,6 +114,7 @@ const Add = (props) => {
                         <label className="inline-block w-1/3 mt-3" htmlFor="form-photo" style={{color: '#43425D'}}>Photo: </label>
                         <input id="form-photo"
                         required
+                        data-testid="form-photo"
                         type="file"
                         className="inline-block p-2 w-4/6 h-12 float-right"
                         />
@@ -123,6 +122,7 @@ const Add = (props) => {
                     <input 
                     className="w-full bg-blue-500 hover:bg-blue-600 h-12 rounded-md text-white"
                     type="submit"
+                    data-testid="form-submit"
                     value="Save Item"
                     />
                 </form>

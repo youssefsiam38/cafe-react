@@ -30,19 +30,10 @@ const Edit = (props) => {
         }
     }, [props])
 
-    useEffect(()=> {
-        console.log(state)
-    }, [state])
-
-
     if (props.getMenuItemQuery.loading) {
         return (
             <Loading/>
         )
-    }
-
-    const borderRed = () => {
-        return " border border-red-500 "
     }
 
     const uploadPhoto = (itemID) => {

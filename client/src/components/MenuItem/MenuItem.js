@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom'
 
 const MenuItem = (props) => {
     const history = useHistory()
-    const MI_ID = props.match.params.id
     const menuItem = props.data.menuItem
 
     useEffect(() => {
@@ -36,7 +35,6 @@ const MenuItem = (props) => {
               id: menuItem.id
         } }).then((res) => {
             // redirect to the main menu
-            // window.location.href = `/`;
             history.push('/?deleted=true');
         }).catch((e) => {
             alert('somthing went wrong with deletion')
@@ -50,15 +48,15 @@ const MenuItem = (props) => {
                 <p className="text-gray-700 text-base inline-block cursor-text mb-8" style={{color: "#888A94"}} >{menuItem.type.toUpperCase()}</p>
                 <br/>
                 <span className="float-right text-lg font-bold cursor-text " >${menuItem.price}</span>
-                <div className="font-bold text-xl mb-8 inline-block cursor-text" style={{color: '#43425D'}}>{menuItem.name}</div>
+                <div className="font-bold text-xl mb-8 inline-block cursor-text" data-testid="itemName" style={{color: '#43425D'}}>{menuItem.name}</div>
                 <br/>
                 <label>Description: </label>
                 <div id="desc" className="my-auto mb-24">
                     <p className="mt-4" style={{color: '#43425D'}} >{menuItem.description}</p>
                 </div>
                 <div className="grid grid-cols-2 place-items-stretch gap-6" >
-                    <button className="bg-green-400 hover:bg-green-600 rounded-md text-white h-8" onClick={gotoEdit}>Edit</button>
-                    <button className="bg-red-600 hover:bg-red-700 rounded-md text-white h-8" onClick={deleteHandler} >Delete</button>
+                    <button className="bg-green-400 hover:bg-green-600 rounded-md text-white h-8" data-testid="editBtn" onClick={gotoEdit}>Edit</button>
+                    <button className="bg-red-600 hover:bg-red-700 rounded-md text-white h-8" data-testid="deleteBtn" onClick={deleteHandler} >Delete</button>
                 </div>
             </div>
             </div>

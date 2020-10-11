@@ -1,21 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import { graphql } from "react-apollo";
-import { useHistory } from 'react-router-dom'
 import { getMenuItemsQuery } from '../../queries/queries.js'
 import Card from './Card.js'
 import Loading from '../Loading.js'
 
 const DisplayMenu = (props) => {
-    const history = useHistory();
     const [menuItemsState, setMenuItemsState] = useState([])
 
 
     useEffect(() => {
 
         if (!props.data.loading) {
-            // if (history.location.search.includes('deleted=')) {
-                props.data.refetch()
-            // }
+
+            props.data.refetch()
+
             setMenuItemsState(props.data.menuItems)
         }
     }, [props])

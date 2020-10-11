@@ -47,8 +47,6 @@ const RootQuery = new GraphQLObjectType({
     menuItems: {
       type: new GraphQLList(MenuItemType),
       resolve(parent, args){ // not using any arguments in this case...
-        // return menuItems;
-        // uising .findAll() returns all data
         return MenuItem.findAll();
       }
     }
