@@ -41,6 +41,39 @@ class MenuItem {
     return results;
   }
 
+  static edit = async (name, type, price, desc, photoURL, id) => {
+
+    try {
+
+      conn.connect();
+
+      conn.resume()
+
+      conn.execute(`update menuItems set 
+      name=?, type=?, price=?, description=?, photoURL=?
+      where id=?;` ,[
+        name,
+        type,
+        price,
+        desc,
+        photoURL,
+        id
+      ]); 
+
+      let [results, _] = await conn.promise().execute('SELECT * from menuitems where id=? ;', [
+        id
+      ]);
+
+    
+      conn.pause();
+    
+      return results[0];
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   static delete = async (id) => {
 
     try {
@@ -77,6 +110,8 @@ class MenuItem {
 
       conn.resume()
 
+      
+
       conn.execute('insert into menuItems (name, type, price, description, photoURL) values (?, ?, ?, ? , ?);',[
         this.name,
         this.type,
@@ -92,8 +127,8 @@ class MenuItem {
       // loop over each property to check that the inserted to the db is the one that retrieved and if not don't return anything
       for (let key in results[0]) {
         // check and skip the id property
-        if (results[0][key] != this[key] && key != 'id') {
-          return console.log('something went wrong', results[0][key], this[key]);
+        if (results[0][key] != this[key] && key != 'id' && key != 'price') {
+          return console.log('something went wrong');
         }
       }
     

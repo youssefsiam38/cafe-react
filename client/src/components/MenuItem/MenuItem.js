@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { graphql, compose } from "react-apollo";
 import {getMenuItemQuery, deleteMenuItemMutation} from '../../queries/queries.js'
 import Loading from '../Loading.js';
@@ -8,11 +8,18 @@ const MenuItem = (props) => {
     const history = useHistory()
     const MI_ID = props.match.params.id
     const menuItem = props.data.menuItem
+
+    useEffect(() => {
+        props.data.refetch()
+    }, [])
+
     if(props.data.loading) {
         return (
             <Loading/>
         )
     }
+
+
     
     const gotoEdit = (e) => {
         if (!e) e = window.event;
@@ -36,8 +43,8 @@ const MenuItem = (props) => {
         })
     }
     return (
-        <div className="p-24 grid grid-cols-1 md:grid-cols-2">
-            <img className="border-4" style={{borderColor: "#43425D", height: 540}} src={menuItem.photoURL}/>
+        <div className="py-24 px-4 md:px-24 grid grid-cols-1 md:grid-cols-2">
+            <img className="border-4 mx-auto" style={{borderColor: "#43425D", height: 440}} src={menuItem.photoURL}/>
             <div>
             <div className="px-6 py-4" style={{color: "#888A94"}} >
                 <p className="text-gray-700 text-base inline-block cursor-text mb-8" style={{color: "#888A94"}} >{menuItem.type.toUpperCase()}</p>

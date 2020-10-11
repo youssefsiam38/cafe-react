@@ -16,10 +16,10 @@ const Header = (props) => {
             >
                 CAFE REACT
             </p>
-            { window.location.pathname === '/' ?
+            { window.location.pathname == '/' ?
             (
                 <button
-                className="md:hidden float-right rounded-md h-12 my-4 col-start-3 text-white mr-4 bg-blue-500 hover:bg-blue-600"
+                className="block md:hidden float-right rounded-md h-12 my-4 col-start-3 text-white mr-4 bg-blue-500 hover:bg-blue-600"
                 onClick={(e) => {
                     history.push("/add");
                 }}

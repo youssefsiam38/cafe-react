@@ -28,16 +28,16 @@ const getMenuItemQuery = gql`
 
 // mutation($variable) << allows variables to be passed to the mutation
 const addMenuItemMutation = gql`
-  mutation($name: String!, $type: String!, $price: String!, $description: String!) {
-    addMenuItem(name: $name, type: $type, price: $price, description: $description){
+  mutation($name: String!, $type: String!, $price: String!, $description: String!, $photoURL: String!) {
+    addMenuItem(name: $name, type: $type, price: $price, description: $description, photoURL: $photoURL){
       name
       id
     }
   }
 `
 const editMenuItemMutation = gql`
-  mutation($id: ID!, $name: String!, $type: String!, $price: String!, $description: String!) {
-    editMenuItem(id: $id, name: $name, type: $type, price: $price, description: $description){
+  mutation($id: ID!, $name: String!, $type: String!, $price: String!, $description: String!, $photoURL: String!) {
+    editMenuItem(id: $id, name: $name, type: $type, price: $price, description: $description, photoURL: $photoURL){
       id
       name
       type
@@ -55,4 +55,4 @@ const deleteMenuItemMutation = gql`
   }
 `
 
-export { getMenuItemsQuery, getMenuItemQuery, addMenuItemMutation, deleteMenuItemMutation };
+export { getMenuItemsQuery, getMenuItemQuery, addMenuItemMutation, editMenuItemMutation, deleteMenuItemMutation };

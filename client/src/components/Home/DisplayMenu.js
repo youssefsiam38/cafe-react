@@ -13,9 +13,9 @@ const DisplayMenu = (props) => {
     useEffect(() => {
 
         if (!props.data.loading) {
-            if (history.location.search.includes('deleted=')) {
+            // if (history.location.search.includes('deleted=')) {
                 props.data.refetch()
-            }
+            // }
             setMenuItemsState(props.data.menuItems)
         }
     }, [props])

@@ -85,7 +85,7 @@ const Mutation = new GraphQLObjectType({
         photoURL:  { type: new GraphQLNonNull(GraphQLString) }
       },
       async resolve(parent, args) {
-        const mi = await MenuItem.delete(args.id);
+        const mi = await MenuItem.edit(args.name, args.type, args.price, args.description, args.photoURL,args.id);
 
         console.log(mi);
 
