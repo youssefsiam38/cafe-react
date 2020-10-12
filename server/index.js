@@ -28,7 +28,6 @@ app.post('/image', upload.single('image'), async (req, res) => {
 
     // insert the img route
     const photoURL = `/imgs/${req.query.id}.${req.ext}`
-    console.log(req.ext)
     conn.execute('update menuItems set photoURL=? where id=? ;', [
       photoURL,
       req.query.id
