@@ -31,6 +31,9 @@ now, we are done with the database, then lets setup the client and server side. 
 ```bash
 ~/App$ cd server && npm i && cd ../client && npm i
 ```
+
+change the name of the <span style="color: #9d4b2d" >server/example.env</span> file to <span style="color: #9d4b2d" >server/.env</span> and add the DB_PASS of your own Database
+
 then
 ```bash
 ~/App/client$ npm run build
@@ -69,7 +72,12 @@ Now, lets fire up our app..
 - Implement the photo upload in the 'add menu item' form. ☑
 
 <h2>Testing</h2>
-My choice was the <a href="https://testing-library.com/" >testing library</a> to take advatage of its <a href="https://github.com/testing-library/user-event" >user event</a> module that can upload file to the form to fully test the UI
+My choice was the <a href="https://testing-library.com/" >testing library</a> to take advatage of its <a href="https://github.com/testing-library/user-event" >user event</a> module that can upload file to the form to fully test the UI, just run...
+
+```bash
+~/App/client$ npm test
+```
+
 <br>
 <br>
 <h1>More features</h1>
@@ -77,20 +85,3 @@ My choice was the <a href="https://testing-library.com/" >testing library</a> to
 - This is a single page application, the browser don't refresh to go to other page
 - The Menu Item page to view the discription and the image with bigger size
 - This application is fully responsive
-
-<!-- 
- move the `go-spell-client` folder to the root of this folder
-
-```bash
-docker-compose up --build
-```
-```bash
-go run main.go
-```
-
-Open `http://localhost` in your browser
-
-> here is a <a href="https://www.postman.com/">postman</a> collection JSON <a href="https://www.postman.com/collections/57515ddaceda8c8ecc31" >file</a> If you want to deal with the API
-
-This project implemented using layered structure that discussed by <a href="https://github.com/katzien">Kat Zien</a> in <a href="https://www.youtube.com/watch?v=oL6JBUk6tj0&t=245s">GopherCon 2018</a>
- -->
