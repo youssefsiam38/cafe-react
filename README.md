@@ -61,7 +61,6 @@ Now, lets fire up our app..
 
 - Using Git locally ☑
 - Including README file ☑
-- Including README file ☑
 - following the style of the design ☑
 - Latest React version ☑
 - Implementing the data store using GraphQL ☑
@@ -83,5 +82,5 @@ My choice was the <a href="https://testing-library.com/" >testing library</a> to
 <h1>More features</h1>
 
 - This is a single page application, the browser don't refresh to go to other page
-- The Menu Item page to view the discription and the image with bigger size
+- The Menu Item page to view the description and the image with bigger size
 - This application is fully responsive
