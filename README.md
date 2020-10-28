@@ -57,7 +57,7 @@ Now, lets fire up our app..
 <br>
 <br>
 
-<h1>Requirments</h1>
+<h1>Test Requirments</h1>
 
 - Using Git locally ☑
 - Including README file ☑
